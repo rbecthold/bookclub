@@ -14,7 +14,7 @@
 	<name>bookclub</name>
 	<description>CIS 530 Bookclub Project</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
