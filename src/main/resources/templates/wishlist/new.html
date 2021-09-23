@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Wishlist Item | Bookclub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha256-djO3wMl9GeaC/u6K+ic4Uj/LKhRUSlUFcsruzS7v5ms=" crossorigin="anonymous">
+</head>
+<body>
+    <div th:insert="~{fragments/header :: header}"></div>
+
+    <div class="py-5 container" style="width: 35%">
+        <h2 class="text-center fw-light">New Wishlist Item Form</h2>
+        <br/>
+
+        <form action="#" th:action="@{/wishlist}" th:object="${wishlistItem}" method="post">
+            <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" class="form-control" id="isbn" name="isbn" th:field="*{isbn}"/>
+                <small th:if="${#fields.hasErrors('isbn')}" style="color: red" th:errors="*{isbn}"/>
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" th:field="*{title}"/>
+                <small th:if="${#fields.hasErrors('title')}" style="color: red" th:errors="*{title}"/>
+            </div>
+            <button class="btn btn-primary float-end" type="submit">Save</button>
+        </form>
+
+        <br/>
+        <br/>
+
+        <a href="/wishlist" th:href="@{/wishlist}">Return to Wishlist</a>
+    </div>
+
+    <div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
+</body>
+</html>
