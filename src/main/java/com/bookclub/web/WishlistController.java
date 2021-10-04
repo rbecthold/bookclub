@@ -1,7 +1,9 @@
 package com.bookclub.web;
 
 import com.bookclub.model.WishlistItem;
-import com.bookclub.service.impl.MemWishlistDao;
+import com.bookclub.service.dao.WishlistDao;
+import com.bookclub.service.impl.MongoWishlistDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +16,16 @@ import java.util.List;
 @RequestMapping("/wishlist")
 public class WishlistController {
 
+    WishlistDao wishlistDao = new MongoWishlistDao();
+
+    @Autowired
+    private void setWishlistDao(WishlistDao wishlistDao) {
+        this.wishlistDao = wishlistDao;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public String showWishlist(Model model) {
-        MemWishlistDao memWishlistDao = new MemWishlistDao();
-        List<WishlistItem> wishList = memWishlistDao.list();
+        List<WishlistItem> wishList = wishlistDao.list();
         model.addAttribute("wishlist", wishList);
         return "wishlist/list";
     }
@@ -30,11 +38,12 @@ public class WishlistController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String addWishlistItem(@Valid WishlistItem wishlistItem, BindingResult bindingResult) {
+        System.out.println(wishlistItem.toString());
         if(bindingResult.hasErrors()) {
             return "wishlist/new";
         }
-        else {
-            return "redirect:/wishlist";
-        }
+
+        wishlistDao.add(wishlistItem);
+        return "redirect:/wishlist";
     }
 }

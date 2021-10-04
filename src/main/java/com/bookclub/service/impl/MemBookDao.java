@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemBookDao implements BookDao {
-    private List<Book> books = new ArrayList<>();
+    private List<Book> books;
 
     public MemBookDao() {
+        this.books = new ArrayList<Book>();
         this.books.add(new Book("978-0142437964", "In Search of Lost Time", "A book about a swan.", 468, List.of("Marcel Proust")));
         this.books.add(new Book("978-1840226355", "Ulysses", "A story about an American General", 736, List.of("James Joyce")));
         this.books.add(new Book("978-0142437230", "Don Quixote", "Who is this man with Sancho Panza?", 1072, List.of("Miguel De Cervantes Saavedra")));
