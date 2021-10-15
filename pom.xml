@@ -69,6 +69,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- OpenAPI Swagger Documentation -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>

@@ -16,27 +16,47 @@
             <a href="/wishlist/new" th:href="@{/wishlist/new}" class="btn btn-outline-secondary">New Wishlist</a>
         </p>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">ISBN</th>
-                <th scope="col">Title</th>
-                <th scope="col">Functions</th>
-            </tr>
-            </thead>
-            <tbody th:each="item : ${wishlist}">
-                <tr>
-                    <td th:text="${item.getIsbn()}"></td>
-                    <td th:text="${item.getTitle()}"></td>
-                    <td>
-                        <a href="#" class="link">Edit</a>
-                        <a href="#" class="link">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="wishlist"></div>
     </div>
 
     <div th:insert="~{fragments/scriptFooter :: scriptFooter}"></div>
+
+    <script type="text/javascript">
+        class HttpClient {
+            async get(url, prams = "") {
+                url = new URL(url);
+                url.search = new URLSearchParams(params).toString();
+
+                console.log(url.toString());
+
+                const res = await fetch(url.toString(), {
+                    method: 'GET',
+                });
+
+                return res.json();
+            }
+        }
+
+        function buildTable (books) {
+            let tableString = `<table class="table"><tr><th>ISBN</th><th>Title</th><th>Functions</th></tr>`;
+
+            for (let book of books) {
+                tableString += `<tr><td>${book.isbn}</td><td>${book.title}</td><td><a href="#">Edit</a> | <a href="#">Delete</a></td></tr>`;
+            }
+
+            tableString += `</table>`
+
+            return tableString;
+        }
+
+        const http = new HttpClient();
+
+        http.get('http://localhost:8080/api/wishlist').then(res => {
+            console.log(res);
+            document.getElementById("wishlist").innerHTML = buildTable(res);
+        }).catch(e => {
+            console.log(e);
+        })
+    </script>
 </body>
 </html>
