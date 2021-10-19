@@ -1,26 +1,28 @@
 package com.bookclub.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Book {
     private String isbn;
     private String title;
     private String description;
     private int numOfPages;
-    private List<String> authors = new ArrayList<>();
+    String infoUrl;
 
 
     public Book() {
-
     }
 
-    public Book(String isbn, String title, String description, int numOfPages, List<String> authors) {
+    public Book(String isbn, String title, String infoUrl) {
+        this.isbn = isbn;
+        this.title = title;
+        this.infoUrl = infoUrl;
+    }
+
+    public Book(String isbn, String title, String description, String infoUrl, int numOfPages) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
         this.numOfPages = numOfPages;
-        this.authors = authors;
+        this.infoUrl = infoUrl;
     }
 
 
@@ -56,17 +58,17 @@ public class Book {
         this.numOfPages = numOfPages;
     }
 
-    public List<String> getAuthors() {
-        return authors;
+    public String getInfoUrl() {
+        return infoUrl;
     }
 
-    public void setAuthors(List<String> authors) {
-        this.authors = authors;
+    public void setInfoUrl(String infoUrl) {
+        this.infoUrl = infoUrl;
     }
 
     @Override
     public String toString() {
         return "Book{isbn="+isbn+", title="+title+", description="+description
-                +", numOfPages="+String.valueOf(numOfPages)+", authors="+authors.toString();
+                +", numOfPages="+String.valueOf(numOfPages)+", infoUrl="+infoUrl;
     }
 }
