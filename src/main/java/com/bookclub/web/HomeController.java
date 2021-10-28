@@ -40,11 +40,10 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public String getMonthlyBook(@PathVariable("id") String id, Model model) {
-        String isbn = id;
         System.out.println(id);
 
         RestBookDao bookDao = new RestBookDao();
-        Book book = bookDao.find(isbn);
+        Book book = bookDao.find(id);
 
         System.out.println(book.toString());
 

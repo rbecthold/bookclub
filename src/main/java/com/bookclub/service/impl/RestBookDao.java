@@ -49,13 +49,13 @@ public class RestBookDao implements BookDao {
     public List<Book> list() {
         String isbnString = "9780593099322,9780261102361,9780261102378,9780590302715,9780316769532";
         Object doc = getBooksDoc(isbnString);
-        List<Book> books = new ArrayList<Book>();
+        List<Book> books = new ArrayList<>();
 
         List<String> titles = JsonPath.read(doc, "$..title");
         List<String> isbns = JsonPath.read(doc, "$..bib_key");
         List<String> infoUrls = JsonPath.read(doc, "$..info_url");
 
-        for(int i=0; i< titles.size(); i++) {
+        for(int i = 0; i < titles.size(); i++) {
             books.add(new Book(isbns.get(i), titles.get(i), infoUrls.get(i)));
         }
 
