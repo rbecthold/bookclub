@@ -51,12 +51,12 @@ public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/about")
     public String showAboutUs(Model model) {
-        return "/about";
+        return "about";
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/contact")
     public String showContactUs(Model model) {
-        return "/contact";
+        return "contact";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
